@@ -1,4 +1,6 @@
-class Horno{
+import 'dart:async';
+
+class Horno {
   int _pastes=15;
   bool _valid = true;
 
@@ -13,8 +15,13 @@ class Horno{
   bool get getValid => _valid;
   
 
-  makePastes(){
-    _pastes = 14;
+  makePastes() {
+    myDelayed();
+    _valid = false;
   }
+
+  Future<void> myDelayed() => Future.delayed(Duration(seconds: 3), () => {
+    _pastes = 14, _valid = true
+  });
 }
 
