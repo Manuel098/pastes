@@ -15,12 +15,12 @@ class Horno {
   bool get getValid => _valid;
   
 
-  makePastes() {
+  makePastes(){
     myDelayed();
     _valid = false;
   }
 
-  Future<void> myDelayed() => Future.delayed(Duration(seconds: 3), () => {
+  Future<void> myDelayed() => Future.delayed(Duration(seconds: 7), () => {
     _pastes = 14, _valid = true
   });
 }

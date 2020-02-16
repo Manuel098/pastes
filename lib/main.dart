@@ -9,7 +9,6 @@ import 'horno.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
- 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -179,18 +178,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   worked({Client cli,int time}) async{
     if(!desp1.getOcuped){
-      horno.setPaste=horno.getPaste - time;
       desp1.setOcuped = true;
       cl1 = cli.getName;
       await delayS(desp1, time);
       print('Hola ${cli.getName} le atiende ${desp1.getName} aqui tiene sus ${time.toString()} pastes');
     }else if(!desp2.getOcuped){
-      horno.setPaste=horno.getPaste - time;
       desp2.setOcuped = true;
       cl2 = cli.getName;
       await delayS(desp2, time);
       print('Hola ${cli.getName} le atiende ${desp2.getName} aqui tiene sus ${time.toString()} pastes');
-    }if(desp2.getOcuped && desp1.getOcuped ){
+    }if(desp2.getOcuped && desp1.getOcuped || horno.getPaste<=0 ){
       await newDelay(1);
       worked(cli:cli,time:time);
     }
@@ -201,6 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
   });
 
   Future<void> delayS(Despachador desp,int time) => Future.delayed(Duration(seconds: time), () => {
+    horno.setPaste=horno.getPaste - time,
     desp.setOcuped = false,
     setState(() {}),
   });
